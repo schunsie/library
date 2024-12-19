@@ -62,9 +62,9 @@ hr {
 .book {
     width: 70%;
     padding: 0.3rem;
-    background: linear-gradient(#fff, #eeeeee6c);
+    background: linear-gradient(#fff, #eeeeee70);
     border-radius: 0.5rem;
-    border: #eeeeee50 outset 1px;
+    border: #eeeeee30 outset 1px;
     box-shadow: 2px 1px 2px 0px rgba(0, 0, 0, 0.1); 
     transition: all 0.3s ease-out;
     
