@@ -63,13 +63,13 @@ hr {
     width: 70%;
     padding: 0.3rem;
     background: linear-gradient(#fff, #eeeeee6c);
-    border-radius: 1rem;
+    border-radius: 0.5rem;
     border: #eeeeee50 outset 1px;
-    box-shadow: 2px 1px 2px 0px rgba(0, 0, 0, 0.3); 
+    box-shadow: 2px 1px 2px 0px rgba(0, 0, 0, 0.1); 
+    transition: all 0.3s ease-out;
     
     &:hover {
-        transition: all 0.2s ease-in-out;
-        box-shadow: 3px 4px 5px 1px rgba(0, 0, 0, 0.5); 
+        box-shadow: 3px 4px 5px 1px rgba(0, 0, 0, 0.3); 
         width: 75%;
     }
     
