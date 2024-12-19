@@ -1,4 +1,5 @@
 const myLibrary = [];
+const content = document.querySelector('.content');
 
 function Book(title, author, pages, read) {
     this.title = title;
@@ -14,16 +15,46 @@ function addBookToLibrary(title, author, pages, read) {
 }
 
 function displayLibrary() {
-    const tableBody = document.querySelector('tbody');
     myLibrary.forEach((book) => {
-        const bookEntry = document.createElement('tr');
-        let stats = Object.values(book);
-        stats.forEach((stat) => {
-            let tableCell = document.createElement('td');
-            tableCell.textContent = stat;
-            bookEntry.appendChild(tableCell);
-        })
-
-        tableBody.appendChild(bookEntry);
+        const bookElement = convertBookToHTML(book);
+        content.appendChild(bookElement);
     })
+}
+
+function convertBookToHTML(book) {
+    const bookElement = document.createElement('div');
+    bookElement.classList.add('book');
+
+    const input = document.createElement('input');
+    input.setAttribute("type", "checkbox");
+    bookElement.appendChild(input);
+
+    const name = document.createElement('div');
+    name.classList.add('name');
+    
+    const bookTitle = document.createElement('h2');
+    bookTitle.classList.add('title');
+    bookTitle.innerText = `${book.title}`;
+    name.appendChild(bookTitle);
+
+    const bookAuthor = document.createElement('div');
+    bookAuthor.classList.add('author');
+    bookAuthor.innerText = `${book.author}`;
+    name.appendChild(bookAuthor);
+    
+    bookElement.appendChild(name);
+
+    const bookPages = document.createElement('div');
+    bookPages.classList.add('pages');
+    bookPages.innerText = `${book.pages} pages`;
+    bookElement.appendChild(bookPages);
+
+    const bookStatus = document.createElement('div');
+    bookStatus.classList.add('status');
+    bookStatus.innerHTML = book.read ? 
+        'read <img class="icon" src="media/icons/book-close.svg">' :
+        'not read yet <img class="icon" src="media/icons/book-open.svg">';
+    bookElement.appendChild(bookStatus);
+
+    return bookElement;
 }
