@@ -58,3 +58,16 @@ function convertBookToHTML(book) {
 
     return bookElement;
 }
+
+content.addEventListener('click', (event) => {
+    const target = event.target
+    
+    switch (target.classList[0]) {
+        case 'add':
+            return alert('test');
+        case 'nr':
+            return alert('test2');
+        case 'r':
+            return alert('test2');
+    }
+});
