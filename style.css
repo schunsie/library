@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 
-* {
+*:not(dialog) {
     margin: 0;
     padding: 0;
 }
@@ -142,3 +142,44 @@ hr {
     width: 20%;
 }
 
+dialog {
+    border-color: rgb(124, 124, 124);
+    border-style: ridge;
+    border-radius: 1rem;
+    padding: 2rem;
+    
+    .desc {
+        margin-bottom: 1rem;
+    }
+
+    input:not([type='checkbox']) {
+        width: 100%;
+    }
+
+    .cfm {
+        width: 85%;
+        margin: 1rem auto 0;
+        text-align: center;
+
+        button {
+            width: 100%;
+            height: 2rem;
+            background-color: #008CBA;
+            color: white;
+            font-weight: 600;
+            border-radius: 0.5rem;
+            border: 2px solid #008CBA;
+            transition: 0.4s;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: white;
+            color: black;
+        }
+    }
+
+    p:not(:last-of-type) label {
+        display: block;
+    }
+}

@@ -25,13 +25,51 @@
         </div>
         <hr>
 
-        <!-- Books -->
-         <div class="content">
+        <div class="content">
             <div class="add add-btn">
                 <span class="add">+</span>
             </div>
-
-
+            
+            <!-- Add book pop up -->
+            <dialog class="book-menu">
+                <form method="dialog">
+                    <div class="desc">
+                        <h2>Add a book</h2>
+                        <p>Fill in the details of the book</p>
+                    </div>
+                    <p>
+                        <label for="title">
+                            <span>Title</span>
+                            <strong><span aria-label="required">*</span></strong>
+                        </label>
+                        <input id="title" type="text" required>
+                    </p>
+                    <p>
+                        <label for="author">
+                            <span>Author</span>
+                            <strong><span aria-label="required">*</span></strong>
+                        </label>
+                        <input id="author" type="text" required>
+                    </p>
+                    <p>
+                        <label for="pages">
+                            <span>Pages</span>
+                            <strong><span aria-label="required">*</span></strong>
+                        </label>
+                        <input id="pages" type="number" required>
+                    </p>
+                    <p>
+                        <label for="read">I have already read this book</label>
+                        <input id="read" type="checkbox">
+                    </p>
+                    <div class="cfm">
+                        <button type="submit">Add book</button>
+                    </div>
+                </form>
+            </dialog>
+            
+            
+            <!-- Books -->
             <div class="book">
                 <input type="checkbox">
                 <div class="name">

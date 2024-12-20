@@ -1,5 +1,6 @@
 const myLibrary = [];
 const content = document.querySelector('.content');
+const dialog = document.querySelector('dialog');
 
 function Book(title, author, pages, read) {
     this.title = title;
@@ -64,7 +65,7 @@ content.addEventListener('click', (event) => {
     
     switch (target.classList[0]) {
         case 'add':
-            return alert('test');
+            return dialog.showModal();
         case 'nr':
             return alert('test2');
         case 'r':
