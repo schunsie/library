@@ -161,6 +161,14 @@ dialog {
         margin-top: 1%;
         box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.5);
         border: 1px rgb(224, 224, 224) inset;
+
+        &:focus {
+            outline: 0.2rem solid #538bc0;
+        }
+
+        &:user-invalid {
+            border-bottom: 2px rgba(255, 0, 0, 0.75) solid;
+        }
     }
 
     .cfm {
