@@ -20,9 +20,13 @@ function addBookToLibrary(title, author, pages, read) {
 
 function displayLibrary() {
     myLibrary.forEach((book) => {
-        const bookElement = convertBookToHTML(book);
-        content.appendChild(bookElement);
+        displayBook(book);
     })
+}
+
+function displayBook(book) {
+    const bookElement = convertBookToHTML(book);
+    content.appendChild(bookElement);
 }
 
 function convertBookToHTML(book) {
@@ -86,7 +90,7 @@ form.addEventListener('submit', (e) => {
     let pages = values[2];
     let read = values[3] ? true : false;
     addBookToLibrary(title, author, pages, read);
-    displayLibrary();
+    displayBook(myLibrary.at(-1));
 });
 
 function retrieveAndReset(input) {
