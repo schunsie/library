@@ -192,4 +192,8 @@ dialog {
         font-weight: bold;
         font-size: 0.9rem;
     }
+
+    p:last-of-type label {
+        padding-right: 0.5rem;
+    }
 }
