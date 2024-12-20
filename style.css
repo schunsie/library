@@ -179,6 +179,10 @@ dialog {
         }
     }
 
+    p {
+        margin: 0.5rem 0;
+    }
+
     p:not(:last-of-type) label {
         display: block;
     }
