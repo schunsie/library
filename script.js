@@ -1,6 +1,9 @@
 const myLibrary = [];
 const content = document.querySelector('.content');
-const dialog = document.querySelector('dialog');
+
+// Modal elements
+const modal = document.querySelector('dialog');
+const form = document.querySelector('.modal-form')
 
 function Book(title, author, pages, read) {
     this.title = title;
@@ -65,10 +68,29 @@ content.addEventListener('click', (event) => {
     
     switch (target.classList[0]) {
         case 'add':
-            return dialog.showModal();
+            return modal.showModal();
         case 'nr':
             return alert('test2');
         case 'r':
             return alert('test2');
     }
 });
+
+form.addEventListener('submit', (e) => {
+    const input = Array.from(document.querySelectorAll('.modal-form input'));
+
+    const values = input.map(retrieveAndReset);
+    
+    let title = values[0];
+    let author = values[1];
+    let pages = values[2];
+    let read = values[3] ? true : false;
+    addBookToLibrary(title, author, pages, read);
+    displayLibrary();
+});
+
+function retrieveAndReset(input) {
+    let value = input.value;
+    input.value = '';
+    return value;
+}
