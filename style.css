@@ -143,8 +143,8 @@ hr {
 }
 
 dialog {
-    border-color: #3a86ce;
-    background-color: #a2c6d4f3;
+    border-color: #538bc0;
+    background-color: #a7c9d6f3;
     color: #fdfdfd;
     border-style: ridge;
     border-radius: 1rem;
@@ -156,6 +156,11 @@ dialog {
 
     input:not([type='checkbox']) {
         width: 100%;
+        border-radius: 0.3rem;
+        padding: 0.2rem 4%;
+        margin-top: 1%;
+        box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.5);
+        border: 1px rgb(224, 224, 224) inset;
     }
 
     .cfm {
