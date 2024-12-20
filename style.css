@@ -143,7 +143,9 @@ hr {
 }
 
 dialog {
-    border-color: rgb(124, 124, 124);
+    border-color: #3a86ce;
+    background-color: #30b9f0f3;
+    color: #fdfdfd;
     border-style: ridge;
     border-radius: 1rem;
     padding: 2rem;
@@ -175,15 +177,19 @@ dialog {
 
         button:hover {
             background-color: white;
-            color: black;
+            color: #000;
         }
     }
 
-    p {
+    form > p {
         margin: 0.5rem 0;
     }
 
     p:not(:last-of-type) label {
         display: block;
+        text-transform: uppercase;
+        letter-spacing: 0.1rem;
+        font-weight: bold;
+        font-size: 0.9rem;
     }
 }
