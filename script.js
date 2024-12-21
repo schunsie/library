@@ -81,14 +81,16 @@ content.addEventListener('click', (event) => {
 });
 
 form.addEventListener('submit', (e) => {
-    const input = Array.from(document.querySelectorAll('.modal-form input'));
-
+    const input = Array.from(document.querySelectorAll('.modal-form input')).slice(0, 2);
     const values = input.map(retrieveAndReset);
+    const readStatus = document.querySelector('#read');
     
     let title = values[0];
     let author = values[1];
     let pages = values[2];
-    let read = values[3] ? true : false;
+    let read = readStatus.checked ? true : false;
+    readStatus.checked = false;
+    
     addBookToLibrary(title, author, pages, read);
     displayBook(myLibrary.at(-1));
 });
