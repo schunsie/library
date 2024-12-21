@@ -115,15 +115,9 @@ hr {
     opacity: 0.5;
     transition: all 0.3s ease-in-out;
     
-    
-    span {
-        color: var(--color);
-        display: inline-block;
-        border: 1px solid var(--color);
-        border-radius: 50%;
-        height: 1rem;
-        width: 1rem;
-        line-height: calc(1ch + 1px);
+    img {
+        width: 1.5rem;
+        vertical-align: middle;
     }
     
     &:hover {
