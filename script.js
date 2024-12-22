@@ -81,7 +81,7 @@ content.addEventListener('click', (event) => {
 });
 
 form.addEventListener('submit', (e) => {
-    const input = Array.from(document.querySelectorAll('.modal-form input')).slice(0, 2);
+    const input = Array.from(document.querySelectorAll('.modal-form input')).slice(0, 3);
     const values = input.map(retrieveAndReset);
     const readStatus = document.querySelector('#read');
     
@@ -90,7 +90,7 @@ form.addEventListener('submit', (e) => {
     let pages = values[2];
     let read = readStatus.checked ? true : false;
     readStatus.checked = false;
-    
+
     addBookToLibrary(title, author, pages, read);
     displayBook(myLibrary.at(-1));
 });
@@ -100,3 +100,8 @@ function retrieveAndReset(input) {
     input.value = '';
     return value;
 }
+
+// Default books for testing
+addBookToLibrary('A Game of Thrones', 'George R. R. Martin', 816, false);
+addBookToLibrary('Sherlock Holmes', 'Arthur Conan Doyle', 160, true);
+displayLibrary();
