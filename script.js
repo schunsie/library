@@ -15,26 +15,27 @@ function Book(title, author, pages, read) {
 function addBookToLibrary(title, author, pages, read) {
     let book = new Book(title, author, pages, read);
 
-    myLibrary.push(book);
+    return myLibrary.push(book);
 }
 
 function displayLibrary() {
-    myLibrary.forEach((book) => {
-        displayBook(book);
+    myLibrary.forEach((book, index) => {
+        displayBook(book, index);
     })
 }
 
-function displayBook(book) {
-    const bookElement = convertBookToHTML(book);
+function displayBook(book, index) {
+    const bookElement = convertBookToHTML(book, index);
     content.appendChild(bookElement);
 }
 
-function convertBookToHTML(book) {
+function convertBookToHTML(book, index) {
     const bookElement = document.createElement('div');
     bookElement.classList.add('book');
 
     const input = document.createElement('input');
     input.setAttribute("type", "checkbox");
+    input.setAttribute("value", `${index}`);
     bookElement.appendChild(input);
 
     const name = document.createElement('div');
@@ -91,8 +92,8 @@ form.addEventListener('submit', (e) => {
     let read = readStatus.checked ? true : false;
     readStatus.checked = false;
 
-    addBookToLibrary(title, author, pages, read);
-    displayBook(myLibrary.at(-1));
+    let index = addBookToLibrary(title, author, pages, read) - 1;
+    displayBook(myLibrary.at(index), index);
 });
 
 function retrieveAndReset(input) {
