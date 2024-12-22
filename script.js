@@ -1,15 +1,30 @@
-const myLibrary = [];
+let myLibrary = [];
 const content = document.querySelector('.content');
 
 // Modal elements
 const modal = document.querySelector('dialog');
-const form = document.querySelector('.modal-form')
+const form = document.querySelector('.modal-form');
+
+const deleteBtn = document.querySelector('.delete-btn');
 
 function Book(title, author, pages, read) {
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.read = read;
+    this.id = makeId(6);
+}
+
+function makeId(length) {
+    let result = '';
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const charactersLength = characters.length;
+    let counter = 0;
+    while (counter < length) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+      counter += 1;
+    }
+    return result;
 }
 
 function addBookToLibrary(title, author, pages, read) {
@@ -19,23 +34,23 @@ function addBookToLibrary(title, author, pages, read) {
 }
 
 function displayLibrary() {
-    myLibrary.forEach((book, index) => {
-        displayBook(book, index);
+    myLibrary.forEach((book) => {
+        displayBook(book);
     })
 }
 
-function displayBook(book, index) {
-    const bookElement = convertBookToHTML(book, index);
+function displayBook(book) {
+    const bookElement = convertBookToHTML(book);
     content.appendChild(bookElement);
 }
 
-function convertBookToHTML(book, index) {
+function convertBookToHTML(book) {
     const bookElement = document.createElement('div');
     bookElement.classList.add('book');
 
     const input = document.createElement('input');
     input.setAttribute("type", "checkbox");
-    input.setAttribute("value", `${index}`);
+    input.setAttribute("value", `${book.id}`);
     bookElement.appendChild(input);
 
     const name = document.createElement('div');
@@ -100,6 +115,27 @@ function retrieveAndReset(input) {
     let value = input.value;
     input.value = '';
     return value;
+}
+
+deleteBtn.addEventListener('click', () => {
+    deleteSelected();
+    displayLibrary();
+});
+
+function deleteSelected() {
+    const selection = Array.from(document.querySelectorAll(".book input[type='checkbox']:checked"));
+    const ids = selection.map(selected => selected.value);
+    removeIdsFromLibrary(ids);
+    clearBooksFromPage();
+}
+
+function removeIdsFromLibrary(ids) {
+    myLibrary = myLibrary.filter(book => !ids.includes(book.id));
+}
+
+function clearBooksFromPage() {
+    const books = document.querySelectorAll('.book');
+    books.forEach(book => book.remove());
 }
 
 // Default books for testing

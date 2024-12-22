@@ -56,7 +56,7 @@ hr {
 }
 
 .content {
-    margin: 0 0 3vh 0;
+    margin: 0 0 2vh 0;
 }
 
 .book {
@@ -202,5 +202,27 @@ dialog {
 
     p:last-of-type label {
         padding-right: 0.5rem;
+    }
+}
+
+.delete-btn {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    visibility: hidden;
+    color: #505050;
+    opacity: 0;
+    left: 10%;
+    
+}
+
+.content:has(.book input[type='checkbox']:checked) + .delete-btn {
+    opacity: 0.7;
+    transition: 0.5s all ease-in-out;
+    visibility: visible;
+    left: 17%;
+    
+    &:hover {
+        opacity: 1;
     }
 }
