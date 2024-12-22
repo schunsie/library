@@ -143,6 +143,15 @@ dialog {
     border-style: ridge;
     border-radius: 1rem;
     padding: 2rem;
+    position: relative;
+
+    .close-btn {
+        width: 1.7rem;
+        position: absolute;
+        right: 1rem;
+        top: 1rem;
+        cursor: pointer;
+    }
     
     .desc {
         margin-bottom: 1rem;

@@ -4,6 +4,7 @@ const content = document.querySelector('.content');
 // Modal elements
 const modal = document.querySelector('dialog');
 const form = document.querySelector('.modal-form');
+const closeBtn = document.querySelector('.close-btn');
 
 const deleteBtn = document.querySelector('.delete-btn');
 
@@ -95,6 +96,8 @@ content.addEventListener('click', (event) => {
             return alert('test2');
     }
 });
+
+closeBtn.addEventListener('click', () => modal.close());
 
 form.addEventListener('submit', (e) => {
     const input = Array.from(document.querySelectorAll('.modal-form input')).slice(0, 3);
