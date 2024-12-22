@@ -2,6 +2,7 @@ let myLibrary = [];
 const content = document.querySelector('.content');
 
 // Modal elements
+const addBtn = document.querySelector('.add-btn');
 const modal = document.querySelector('dialog');
 const form = document.querySelector('.modal-form');
 const closeBtn = document.querySelector('.close-btn');
@@ -84,17 +85,8 @@ function convertBookToHTML(book) {
     return bookElement;
 }
 
-content.addEventListener('click', (event) => {
-    const target = event.target
-    
-    switch (target.classList[0]) {
-        case 'add':
-            return modal.showModal();
-        case 'nr':
-            return alert('test2');
-        case 'r':
-            return alert('test2');
-    }
+addBtn.addEventListener('click', () => {
+    modal.showModal();
 });
 
 closeBtn.addEventListener('click', () => modal.close());
@@ -144,4 +136,5 @@ function clearBooksFromPage() {
 // Default books for testing
 addBookToLibrary('A Game of Thrones', 'George R. R. Martin', 816, false);
 addBookToLibrary('Sherlock Holmes', 'Arthur Conan Doyle', 160, true);
+addBookToLibrary('Harry Potter', 'J. K. Rowling', 480, true);
 displayLibrary();
