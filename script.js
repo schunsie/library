@@ -7,7 +7,9 @@ const modal = document.querySelector('dialog');
 const form = document.querySelector('.modal-form');
 const closeBtn = document.querySelector('.close-btn');
 
+// Bottom menu buttons
 const deleteBtn = document.querySelector('.delete-btn');
+const toggleBtn = document.querySelector('.toggle-btn');
 
 function Book(title, author, pages, read) {
     this.title = title;
@@ -114,7 +116,6 @@ function retrieveAndReset(input) {
 
 deleteBtn.addEventListener('click', () => {
     deleteSelected();
-    // displayLibrary();
 });
 
 function deleteSelected() {
@@ -134,6 +135,31 @@ function clearBooksFromPage(ids) {
         delTarget.remove();
     })
 }
+
+toggleBtn.addEventListener('click', toggleBookStatus);
+
+function toggleBookStatus() {
+    const selection = Array.from(content.querySelectorAll('.book input:checked'));
+    const ids = selection.map(selected => selected.value);
+
+    myLibrary.forEach(book => {
+        if (ids.includes(book.id)) {
+            book.read = !book.read;
+            updateStatusDisplay(book.id, book.read);
+        }
+    })
+    selection.forEach(selected => selected.checked = false);
+}
+
+function updateStatusDisplay(id, newStatus) {
+    const targetBook = content.querySelector(`input[value='${id}']`).parentElement;
+    let bookStatus = targetBook.querySelector('.status');
+
+    bookStatus.innerHTML = newStatus ? 
+        'read <img class="icon" src="media/icons/book-close.svg">' :
+        'not read yet <img class="icon" src="media/icons/book-open.svg">';
+}
+
 
 // Default books for testing
 addBookToLibrary('A Game of Thrones', 'George R. R. Martin', 816, false);
