@@ -250,3 +250,34 @@ dialog {
         opacity: 1;
     }
 } 
+
+.footer {
+    margin: 0 auto;
+    width: 60%;
+    max-width: 66ch;
+    text-align: center;
+    color: #5a5a5a;
+
+    img {
+        width: 1.5rem;
+        vertical-align: middle;
+        margin-left: 0.2rem;
+    }
+    p:last-child {
+        margin-top: 1rem;
+    }
+
+    #js {
+        color: #bb6d06;
+    }
+
+    a,
+    a:hover,
+    a:visited {
+        color: inherit
+    }
+
+    #odin {
+        color: #4e90a7;
+    }
+}
