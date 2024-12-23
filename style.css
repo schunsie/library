@@ -214,24 +214,39 @@ dialog {
     }
 }
 
-.delete-btn {
-    display: inline-block;
-    position: relative;
-    cursor: pointer;
-    visibility: hidden;
+.bottom-menu {
     color: #505050;
-    opacity: 0;
-    left: 10%;
+    display: flex;
+    justify-content: space-between;
+    width: 65%;
+    margin: 0 auto;
     
-}
+    
+    & > * {
+        cursor: pointer;
+        opacity: 0;
+        visibility: hidden;
+        position: relative;
+    }
 
-.content:has(.book input[type='checkbox']:checked) + .delete-btn {
-    opacity: 0.7;
-    transition: 0.5s all ease-in-out;
-    visibility: visible;
-    left: 17%;
-    
-    &:hover {
-        opacity: 1;
+    .delete-btn {
+        left: -10%;
+    }
+
+    .toggle-btn {
+        left: 10% 
     }
 }
+
+.content:has(.book input[type='checkbox']:checked) + .bottom-menu {
+    & > * {
+        opacity: 0.7;
+        transition: 0.5s all ease-in-out;
+        visibility: visible;
+        left: 0;
+    }
+    
+    & > *:hover {
+        opacity: 1;
+    }
+} 
