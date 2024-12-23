@@ -114,23 +114,25 @@ function retrieveAndReset(input) {
 
 deleteBtn.addEventListener('click', () => {
     deleteSelected();
-    displayLibrary();
+    // displayLibrary();
 });
 
 function deleteSelected() {
     const selection = Array.from(document.querySelectorAll(".book input[type='checkbox']:checked"));
     const ids = selection.map(selected => selected.value);
     removeIdsFromLibrary(ids);
-    clearBooksFromPage();
+    clearBooksFromPage(ids);
 }
 
 function removeIdsFromLibrary(ids) {
     myLibrary = myLibrary.filter(book => !ids.includes(book.id));
 }
 
-function clearBooksFromPage() {
-    const books = document.querySelectorAll('.book');
-    books.forEach(book => book.remove());
+function clearBooksFromPage(ids) {
+    ids.forEach((id) => {
+        const delTarget = content.querySelector(`input[value='${id}']`).parentNode;
+        delTarget.remove();
+    })
 }
 
 // Default books for testing
