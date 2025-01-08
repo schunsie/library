@@ -1,6 +1,16 @@
-const myLibrary = new class {
-    #library = [];
+const Library = new class {
+    #books = [];
+    
+    add(book) {
+        if (!(book instanceof Book)) {
+            throw new Error('Invalid book entry.')
+        }
+        this.#books.push(book);
+    }
 
+    get books() {
+        return [...this.#books];
+    }
 }
 
 class Book {
@@ -11,11 +21,11 @@ class Book {
     #id;
 
     constructor(title, author, pages, status) {
-        this.title = title;
-        this.author = author;
-        this.pages = pages;
-        this.status = status;
-        this.id = makeId(6);
+        this.#title = title;
+        this.#author = author;
+        this.#pages = pages;
+        this.#status = status;
+        this.#id = this.#makeId(6);
     } 
 
     #makeId(length) {
@@ -31,11 +41,11 @@ class Book {
     }
 
     changeStatus() {
-        this.status = true ? false : true; 
+        this.#status = true ? false : true; 
     }
 }
 
-// /*
+/*
 let myLibrary = [];
 const content = document.querySelector('.content');
 
