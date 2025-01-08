@@ -1,3 +1,41 @@
+const myLibrary = new class {
+    #library = [];
+
+}
+
+class Book {
+    #title;
+    #author;
+    #pages;
+    #status;
+    #id;
+
+    constructor(title, author, pages, status) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.status = status;
+        this.id = makeId(6);
+    } 
+
+    #makeId(length) {
+        let result = '';
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        const charactersLength = characters.length;
+        let counter = 0;
+        while (counter < length) {
+            result += characters.charAt(Math.floor(Math.random() * charactersLength));
+            counter += 1;
+        }
+        return result;
+    }
+
+    changeStatus() {
+        this.status = true ? false : true; 
+    }
+}
+
+// /*
 let myLibrary = [];
 const content = document.querySelector('.content');
 
@@ -166,3 +204,4 @@ addBookToLibrary('A Game of Thrones', 'George R. R. Martin', 816, false);
 addBookToLibrary('Sherlock Holmes', 'Arthur Conan Doyle', 160, true);
 addBookToLibrary('Harry Potter', 'J. K. Rowling', 480, true);
 displayLibrary();
+*/
