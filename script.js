@@ -8,7 +8,12 @@ const Library = new class {
         this.#books.push(book);
     }
 
+    delete(...ids) {
+        this.#books = this.#books.filter((book) => !ids.includes(book.id));
+    }
+
     get books() {
+        // Return shallow copy as to prevent altering of #books
         return [...this.#books];
     }
 }
@@ -42,6 +47,10 @@ class Book {
 
     changeStatus() {
         this.#status = true ? false : true; 
+    }
+
+    get id() {
+        return this.#id;
     }
 }
 
