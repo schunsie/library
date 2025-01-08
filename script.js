@@ -54,6 +54,51 @@ class Book {
     }
 }
 
+const displayController = new class {
+    
+    // Initialize references to DOM elements
+    #content = document.querySelector('.content');
+    // Modal elements
+    #addBtn = document.querySelector('.add-btn');
+    #modal = document.querySelector('dialog');
+    #form = document.querySelector('.modal-form');
+    #closeBtn = document.querySelector('.close-btn');
+    // Bottom menu buttons
+    #deleteBtn = document.querySelector('.delete-btn');
+    #toggleBtn = document.querySelector('.toggle-btn');
+
+    constructor () {
+        // Initialize event listeners
+        this.#addBtn.addEventListener('click', () => this.#modal.showModal());
+        this.#closeBtn.addEventListener('click', () => this.#modal.close());
+        this.#toggleBtn.addEventListener('click', this.#btnHandler);
+        this.#deleteBtn.addEventListener('click', this.#btnHandler);
+        this.#form.addEventListener('submit', this.#formHandler);
+    } 
+    
+    // Event handling functions
+    #btnHandler(event) {
+        console.log(event.target.classList);
+        switch (event.target.className) {
+            case ('toggle-btn'):
+                alert('Toggle pressed');
+                break;
+            case ('delete-btn'):
+                alert('Delete pressed');
+                break;
+        }
+    }
+
+    #formHandler() {
+        const inputs = document.querySelectorAll('.modal-form input');
+        const response = {};
+        inputs.forEach((el) => el.id === 'status' ? response[el.id] = el.checked : response[el.id] = el.value);
+        this.reset();
+        Library.add(new Book(response.title, response.author, response.pages, response.status));
+    }
+        
+}
+
 /*
 let myLibrary = [];
 const content = document.querySelector('.content');
