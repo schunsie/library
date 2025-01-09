@@ -1,27 +1,3 @@
-const Library = new class {
-    #books = [];
-    
-    add(book) {
-        if (!(book instanceof Book)) {
-            throw new Error('Invalid book entry.')
-        }
-        this.#books.push(book);
-    }
-
-    delete(...ids) {
-        this.#books = this.#books.filter((book) => !ids.includes(book.id));
-    }
-
-    get books() {
-        // Return shallow copy as to prevent altering of #books
-        return [...this.#books];
-    }
-
-    getLastBook() {
-        return this.#books.at(-1);
-    }
-}
-
 class Book {
     #title;
     #author;
@@ -62,12 +38,42 @@ class Book {
             title : this.#title,
             author : this.#author,
             pages : this.#pages,
-            status : this.#status
+            status : this.#status,
+            id : this.#id
         };
     } 
-
-
 }
+
+const Library = new class {
+    #books = [];
+    
+    add(book) {
+        if (!(book instanceof Book)) {
+            throw new Error('Invalid book entry.')
+        }
+        this.#books.push(book);
+    }
+
+    delete(...ids) {
+        this.#books = this.#books.filter((book) => !ids.includes(book.id));
+    }
+
+    get books() {
+        // Return shallow copy as to prevent altering of #books
+        return [...this.#books];
+    }
+
+    getLastBook() {
+        return this.#books.at(-1);
+    }
+
+    constructor() {
+        // test books
+        this.add(new Book('A Game of Thrones', 'George R. R. Martin', 694, false));
+        this.add(new Book('Sherlock Holmes', 'Arthur Conan Doyle', 210, true));
+    }
+}
+
 
 const displayController = new class {
     
@@ -88,12 +94,10 @@ const displayController = new class {
         this.#closeBtn.addEventListener('click', () => this.#modal.close());
         this.#toggleBtn.addEventListener('click', this.#btnHandler);
         this.#deleteBtn.addEventListener('click', this.#btnHandler);
-        this.#form.addEventListener('submit', this.#formHandler);
+        this.#form.addEventListener('submit', (event) => this.#formHandler(event.target));
 
-        // Initial draw of library array.
-        // Doesn't do anything as of now, 
-        // since there is no storage of data between page reloads
-        Library.books.forEach(this.displayBook);
+        // Initial draw of library
+        this.#displayLibrary()
     } 
     
     // Event handling functions
@@ -109,22 +113,24 @@ const displayController = new class {
         }
     }
 
-    #formHandler() {
+    #formHandler(form) {
         const inputs = document.querySelectorAll('.modal-form input');
         const response = {};
         inputs.forEach((el) => el.id === 'status' ? response[el.id] = el.checked : response[el.id] = el.value);
-        this.reset();
+        form.reset();
         Library.add(new Book(response.title, response.author, response.pages, response.status));
-        displayController.displayBook(Library.getLastBook().info);
+        this.#displayBook(Library.getLastBook());
     }
     
-    displayBook(book) {
-        const bookHTML = this.#convertBookToHTML(book);
+    #displayBook(book) {
+        const bookHTML = this.#convertBookToHTML(book.info);
         this.#content.appendChild(bookHTML);
-        console.log(this)
     }
 
-    // TODO: Fix dit. De variabelen in boek zijn private.
+    #displayLibrary() {
+        Library.books.forEach((book) => this.#displayBook(book));
+    }
+
     #convertBookToHTML(book) {
         const bookElement = document.createElement('div');
         bookElement.classList.add('book');
@@ -156,7 +162,7 @@ const displayController = new class {
     
         const bookStatus = document.createElement('div');
         bookStatus.classList.add('status');
-        bookStatus.innerHTML = book.read ? 
+        bookStatus.innerHTML = book.status ? 
             'read <img class="icon" src="media/icons/book-close.svg">' :
             'not read yet <img class="icon" src="media/icons/book-open.svg">';
         bookElement.appendChild(bookStatus);
