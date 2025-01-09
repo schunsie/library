@@ -16,6 +16,10 @@ const Library = new class {
         // Return shallow copy as to prevent altering of #books
         return [...this.#books];
     }
+
+    getLastBook() {
+        return this.#books.at(-1);
+    }
 }
 
 class Book {
@@ -52,6 +56,17 @@ class Book {
     get id() {
         return this.#id;
     }
+
+    get info() {
+        return {
+            title : this.#title,
+            author : this.#author,
+            pages : this.#pages,
+            status : this.#status
+        };
+    } 
+
+
 }
 
 const displayController = new class {
@@ -74,6 +89,11 @@ const displayController = new class {
         this.#toggleBtn.addEventListener('click', this.#btnHandler);
         this.#deleteBtn.addEventListener('click', this.#btnHandler);
         this.#form.addEventListener('submit', this.#formHandler);
+
+        // Initial draw of library array.
+        // Doesn't do anything as of now, 
+        // since there is no storage of data between page reloads
+        Library.books.forEach(this.displayBook);
     } 
     
     // Event handling functions
@@ -95,8 +115,54 @@ const displayController = new class {
         inputs.forEach((el) => el.id === 'status' ? response[el.id] = el.checked : response[el.id] = el.value);
         this.reset();
         Library.add(new Book(response.title, response.author, response.pages, response.status));
+        displayController.displayBook(Library.getLastBook().info);
     }
+    
+    displayBook(book) {
+        const bookHTML = this.#convertBookToHTML(book);
+        this.#content.appendChild(bookHTML);
+        console.log(this)
+    }
+
+    // TODO: Fix dit. De variabelen in boek zijn private.
+    #convertBookToHTML(book) {
+        const bookElement = document.createElement('div');
+        bookElement.classList.add('book');
+    
+        const input = document.createElement('input');
+        input.setAttribute("type", "checkbox");
+        input.setAttribute("value", `${book.id}`);
+        bookElement.appendChild(input);
+    
+        const name = document.createElement('div');
+        name.classList.add('name');
         
+        const bookTitle = document.createElement('h2');
+        bookTitle.classList.add('title');
+        bookTitle.innerText = `${book.title}`;
+        name.appendChild(bookTitle);
+    
+        const bookAuthor = document.createElement('div');
+        bookAuthor.classList.add('author');
+        bookAuthor.innerText = `${book.author}`;
+        name.appendChild(bookAuthor);
+        
+        bookElement.appendChild(name);
+    
+        const bookPages = document.createElement('div');
+        bookPages.classList.add('pages');
+        bookPages.innerText = `${book.pages} pages`;
+        bookElement.appendChild(bookPages);
+    
+        const bookStatus = document.createElement('div');
+        bookStatus.classList.add('status');
+        bookStatus.innerHTML = book.read ? 
+            'read <img class="icon" src="media/icons/book-close.svg">' :
+            'not read yet <img class="icon" src="media/icons/book-open.svg">';
+        bookElement.appendChild(bookStatus);
+    
+        return bookElement;
+    }
 }
 
 /*
